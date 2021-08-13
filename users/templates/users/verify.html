@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <div class="text-center">
+        {% if user.is_authenticated %}
+            <h3 class="mt-5">Успех, регистрация завершена!</h3>
+            <div class="lead">Пользователь {{ user.email }} успешно активирован!</div>
+            <br>
+        {% else %}
+            <h3 class="mt-5">Ошибка, регистрация не завершена!</h3>
+            <div class="lead">Пользователя {{ user.email }} не удалось активировать!</div>
+            <br>
+        {% endif %}
+        <a href="{% url 'products:index' %}" class="btn btn-primary">На главную</a>
+    </div>
+{% endblock %}
