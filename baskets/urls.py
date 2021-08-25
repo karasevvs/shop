@@ -1,6 +1,7 @@
 from django.urls import path
 
 from baskets.views import basket_add, basket_remove, basket_edit, view
+from django.views.decorators.cache import cache_page
 
 app_name = 'baskets'
 

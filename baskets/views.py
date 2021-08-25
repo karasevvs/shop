@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
-
 @login_required
 def basket_add(request, product_id):
     product = Product.objects.get(id=product_id)
