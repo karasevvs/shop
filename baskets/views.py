@@ -5,7 +5,6 @@ from baskets.models import Basket
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.http import JsonResponse
-from django.views.decorators.cache import cache_page
 
 
 @login_required
@@ -48,7 +47,6 @@ def basket_edit(request, id, quantity):
         return JsonResponse({'result': result})
 
 
-@cache_page(120)
 def view(request):
     context = {'title': 'GeekShop - Корзина',
                'baskets': Basket.objects.filter(user=request.user),
