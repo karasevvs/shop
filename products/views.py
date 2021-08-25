@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.cache import cache
 from products.models import ProductCategory, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.views.decorators.cache import cache_page
 
 # Create your views here.
 
@@ -27,7 +27,7 @@ def get_links_menu():
         return ProductCategory.objects.all()
 
 
-
+@cache_page(1800)
 def products(request, category_id=None, page=1):
     context = {'title': 'GeekShop - Каталог',
                'categories': get_links_menu()}

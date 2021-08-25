@@ -48,7 +48,7 @@ def basket_edit(request, id, quantity):
         return JsonResponse({'result': result})
 
 
-@cache_page(3600)
+@cache_page(120)
 def view(request):
     context = {'title': 'GeekShop - Корзина',
                'baskets': Basket.objects.filter(user=request.user),
