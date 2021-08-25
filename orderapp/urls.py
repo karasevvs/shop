@@ -1,7 +1,5 @@
 from django.urls import path
 from orderapp import views
-from django.views.decorators.cache import cache_page
-
 app_name = 'orderapp'
 
 urlpatterns = [
@@ -9,7 +7,7 @@ urlpatterns = [
     path('create/', views.OrderItemCreate.as_view(), name='create'),
     path('update/<int:pk>/', views.OrderItemUpdate.as_view(), name='update'),
     path('delete/<int:pk>/', views.OrderItemsDelete.as_view(), name='delete'),
-    path('read/<int:pk>/', cache_page(3600)(views.OrderItemsRead.as_view(), name='read')),
+    path('read/<int:pk>/', views.OrderItemsRead.as_view(), name='read'),
 
     path('forming/complete/<int:pk>/', views.order_forming_complete, name='order_forming_complete'),
     path('product/<pk>/price/', views.product_price),
