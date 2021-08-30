@@ -18,6 +18,7 @@ class UserAdminProfileForm(UserProfileForm):
 
 
 class ProductCategoryAdminProfileForm(ProductCategoryForm):
+    discount = forms.IntegerField(label='скидка', required=False, min_value=0, max_value=90, initial=0)
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
 
