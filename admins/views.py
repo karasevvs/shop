@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
-
+from django.db.models import F
 
 @user_passes_test(lambda u: u.is_staff)
 def index(request):
@@ -106,6 +106,16 @@ class CategoryUpdateView(UpdateView):
     form_class = ProductCategoryAdminProfileForm
     template_name = 'admins/admin-category-update-delete.html'
     success_url = reverse_lazy('admins:admin_category')
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                print(f'применяется скидка {discount}% к товарам {self.object.name}')
+                self.object.product_set.update(price=F('price') * (1 - discount / 100))
+
+        return super().form_valid(form)
+
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CategoryUpdateView, self).get_context_data(object_list=None, **kwargs)
