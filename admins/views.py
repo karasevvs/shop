@@ -111,9 +111,7 @@ class CategoryUpdateView(UpdateView):
         if 'discount' in form.cleaned_data:
             discount = form.cleaned_data['discount']
             if discount:
-                print(f'применяется скидка {discount}% к товарам {self.object.name}')
-                self.object.product_set.update(price=F('price') * (1 - discount / 100))
-                db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
+                self.object.products.update(price=F('price') * (1 - discount / 100))
 
         return super().form_valid(form)
 
