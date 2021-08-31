@@ -111,7 +111,7 @@ class CategoryUpdateView(UpdateView):
         if 'discount' in form.cleaned_data:
             discount = form.cleaned_data['discount']
             if discount:
-                self.object.products.update(price=F('price') * (1 - discount / 100))
+                self.object.product.update(price=F('price') * (1 - discount / 100))
 
         return super().form_valid(form)
 
