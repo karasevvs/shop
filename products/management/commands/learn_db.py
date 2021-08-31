@@ -10,4 +10,7 @@ from orderapp.models import OrderItem
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        pass
+        products_list = Product.objects.filter(
+        Q(category__name='офис') | Q(category__name='дом')
+        )
+        print(products_list.values_list('category__name', flat=True))
