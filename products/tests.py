@@ -5,8 +5,6 @@ from django.core.management import call_command
 
 # Create your tests here.
 STATUS_CODE_ACCESS = 200
-STATUS_CODE_REDIRECT = 301
-
 
 class ProductsSmokeTest(TestCase):
 
@@ -33,4 +31,4 @@ class ProductsSmokeTest(TestCase):
 
         for category in ProductCategory.objects.all():
             response = self.client.get(f'/products/{category.pk}')
-            self.assertEqual(response.status_code, STATUS_CODE_REDIRECT)
+            self.assertEqual(response.status_code, STATUS_CODE_ACCESS)
